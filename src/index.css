@@ -1,1 +1,60 @@
 @import "tailwindcss";
+
+/* Enable dark mode */
+@custom-variant dark (&:is(.dark *));
+
+/* Map tokens to Tailwind */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-card: var(--card);
+  --color-border: var(--border);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+}
+
+/* 🌿 LIGHT MODE (DEFAULT) */
+:root {
+  --background: #ffffff;
+  --foreground: #0F172A;
+
+  --muted-foreground: #6b7280;
+
+  --primary: #A3E635;
+  --primary-foreground: #0F172A;
+
+  --black:black;
+
+  --accent: #FACC15;
+
+  --card: #ffffff;
+  --border: #D9F99D;
+}
+
+/* 🌙 DARK MODE */
+.dark {
+  --background: #0b0b0b;
+  --foreground: #ffffff;
+
+  --muted-foreground: #9ca3af;
+
+  --primary: #A3E635;
+  --primary-foreground: #0F172A;
+
+  --accent: #FACC15;
+
+  --card: #141414;
+  --border: #27272a;
+}
+
+/* Apply globally */
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}

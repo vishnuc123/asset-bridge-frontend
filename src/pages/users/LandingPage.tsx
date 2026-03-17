@@ -1,26 +1,13 @@
-export default function LandingPage() {
+import { useNavigate } from "react-router-dom";
+import UserNavbar from "../../components/navbars/userNavbar";
+
+export default function UserLandingPage() {
+  const navigate = useNavigate()
   return (
-    <div className="bg-[#0b0b0b] text-white min-h-screen font-sans">
+    <div className="bg-background text-white min-h-screen font-sans">
 
       {/* Navbar */}
-      <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-10 py-4 gap-4 md:gap-0">
-        
-        <div className="flex flex-wrap items-center gap-4 md:gap-6 text-xs md:text-sm text-gray-300">
-          <span className="font-semibold text-white">ASSET BRIDGE</span>
-          <span>Hotels</span>
-          <span>Destinations</span>
-          <span>About</span>
-        </div>
-
-        <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm">
-          <button className="px-3 md:px-4 py-1 border border-gray-600 rounded-full">
-            Login
-          </button>
-          <button className="px-3 md:px-4 py-1 bg-white text-black rounded-full">
-            Sign Up
-          </button>
-        </div>
-      </div>
+      <UserNavbar isAuthenticated={false}/>
 
       {/* Hero Section */}
       <div className="relative px-4 md:px-10 pt-6 md:pt-10">
@@ -28,6 +15,9 @@ export default function LandingPage() {
 
           <img
             src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+            loading="lazy"
+            decoding="async"
+            alt="hero-image"
             className="w-full h-[300px] md:h-[420px] object-cover"
           />
 
@@ -134,7 +124,7 @@ export default function LandingPage() {
             24/7 Support
           </div>
         </div>
-      </div>
+      </div>  
 
       {/* Footer CTA */}
       <div className="text-center py-10 md:py-16 px-4">
