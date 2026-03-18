@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import type { TSignupProps } from "../../types/Auth.types";
 import { useForm } from "react-hook-form";
-import { signupValidation } from "../../validations/auth/SignupValidations";
-import type { SignupFormData } from "../../validations/auth/Auth.schema";
+// import { ../../validations/auth/t { type SignupFormData } from "../../validations/auth/Auth.schema";
 import type React from "react";
 import type { ISignupformsProps } from "../../interfaces/auth.interfaces";
+import { signupSchema, type SignupFormData } from "../../validations/auth/Auth.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignupComp: React.FC<ISignupformsProps> = ({ role = "User", subtitle, onSubmit, isLoading = false }) => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors, isSubmitting }, } = useForm<SignupFormData>();
+    const { register, handleSubmit, formState: { errors, isSubmitting }, } = useForm<SignupFormData>({
+        resolver:zodResolver(signupSchema)
+    });
 
     // const onSubmit = async (data) => {
 
@@ -59,46 +61,46 @@ const SignupComp: React.FC<ISignupformsProps> = ({ role = "User", subtitle, onSu
                 </div>
 
                 {/* Inputs */}
-                <input
-                    {...register("firstname", signupValidation.name)}
-                    type="text"
-                    placeholder="Full name"
-                    className="w-full mb-4 p-3 bg-background border border-border rounded-lg text-sm outline-none focus:border-primary"
-
-                />
                 {errors.firstname && <p className="text-red-500 text-xs">{errors.firstname.message}</p>}
                 <input
-                    {...register("lastname", signupValidation.name)}
+                    {...register("firstname", )}
                     type="text"
                     placeholder="Full name"
                     className="w-full mb-4 p-3 bg-background border border-border rounded-lg text-sm outline-none focus:border-primary"
 
                 />
                 {errors.lastname && <p className="text-red-500 text-xs">{errors.lastname.message}</p>}
-
                 <input
-                    {...register("email", signupValidation.email)}
+                    {...register("lastname", )}
+                    type="text"
+                    placeholder="Last name"
+                    className="w-full mb-4 p-3 bg-background border border-border rounded-lg text-sm outline-none focus:border-primary"
+
+                />
+
+                {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
+                <input
+                    {...register("email", )}
                     type="email"
                     placeholder="Enter your email"
                     className="w-full mb-4 p-3 bg-background border border-border rounded-lg text-sm outline-none focus:border-primary"
                 />
-                {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
 
+                {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
                 <input
-                    {...register("password", signupValidation.password)}
+                    {...register("password", )}
                     type="password"
                     placeholder="Create password"
                     className="w-full mb-4 p-3 bg-background border border-border rounded-lg text-sm outline-none focus:border-primary"
                 />
-                {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
 
+                {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword.message}</p>}
                 <input
-                    {...register("confirmPassword", { required: "please confirm your password" })}
+                    {...register("confirmPassword")}
                     type="password"
                     placeholder="Confirm password"
                     className="w-full mb-4 p-3 bg-background border border-border rounded-lg text-sm outline-none focus:border-primary"
                 />
-                {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword.message}</p>}
 
                 {/* Terms */}
                 <div className="flex items-start gap-2 mb-4 text-xs text-muted-foreground">
