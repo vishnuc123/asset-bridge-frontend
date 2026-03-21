@@ -1,4 +1,4 @@
-export type TRole = "user"|"admin"|"property_owner"|"investor"
+export type TRole = "User"|"Admin"|"Property_owner"|"Investor"
 
 
 export type TSignupProps = {
@@ -16,5 +16,34 @@ export type TSignUpFormValues = {
     password: string;
     confirmPassword: string;
     role: string;
-    subscriptionType: string;
+}
+
+export type TotpFormValues = {
+    otp:string,
+    userId : string,
+    purpose:"signup" | "reset"
+}
+
+export type TOtpVerificationProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (otp: string) => void;
+  length?: number;
+  userId:string
+  isOtploading?: boolean;
+};
+
+
+
+
+export type TloginFormProps = {
+    role:string,
+    subtitle:string,
+    onSubmit:(data:any) => void,
+    isLoading:boolean
+}
+
+export type TloginFormData = {
+    email:string,
+    password:string
 }

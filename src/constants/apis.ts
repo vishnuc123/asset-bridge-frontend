@@ -1,3 +1,5 @@
 export const Auth_Apis = {
-    signup:"/signup"
+    signup:"/signup",
+    verifyOtp : "/otp/verifyotp",
+    login:"/login"
 }

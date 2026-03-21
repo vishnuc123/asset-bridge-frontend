@@ -10,3 +10,21 @@ export interface ISignupformsProps{
     onSubmit:(data:any) => void
     isLoading:boolean
 }
+
+
+export interface IUser {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: TRole
+  kycStatus: string;
+  emailVerified: boolean;
+  phoneVerified: boolean;
+}
+
+
+export interface AuthState {
+  user: IUser | null;
+  isAuthenticated: boolean;
+}

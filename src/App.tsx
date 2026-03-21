@@ -12,6 +12,7 @@ const App: React.FC = () => {
         <Router>
           <ErrorBoundary>
             <Routes>
+              
               <Route path='/' element={<MainLandingPage />}/>
               <Route path='/user/*' element={<UserRoutes />}/>
               {/* <Route path='/admin' element={<LandingPage />}/>
