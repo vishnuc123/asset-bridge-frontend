@@ -4,6 +4,7 @@ import type { TloginFormData, TloginFormProps } from "../../types/Auth.types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, signupSchema } from "../../validations/auth/Auth.schema";
+import { GoogleLoginButton } from "../buttons/user/googlebtn";
 const Logincomp: React.FC<TloginFormProps> = ({ role = "User", subtitle, onSubmit, isLoading = false }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<TloginFormData>({
         resolver: zodResolver(LoginSchema)
@@ -29,13 +30,13 @@ const Logincomp: React.FC<TloginFormProps> = ({ role = "User", subtitle, onSubmi
                 </p>
 
                 {/* Google Auth */}
-                <button className="w-full flex items-center justify-center gap-3 border border-[#D9F99D] py-2 rounded-lg mb-4 hover:bg-[#F0FFF4] transition">
+                {/* <button className="w-full flex items-center justify-center gap-3 border border-[#D9F99D] py-2 rounded-lg mb-4 hover:bg-[#F0FFF4] transition">
                     <img
                         src="https://www.svgrepo.com/show/475656/google-color.svg"
                         className="w-5 h-5"
-                    />
-                    Continue with Google
-                </button>
+                    /> */}
+                    <GoogleLoginButton role="User"/>
+                {/* </button> */}
 
                 {/* Divider */}
                 <div className="flex items-center gap-3 mb-4">

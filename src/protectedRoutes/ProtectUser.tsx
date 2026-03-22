@@ -17,25 +17,29 @@ const ProtectUser: React.FC<IProtectedProps> = ({
 }) => {
     const auth = useSelector((state: RootState) => state.auth);
     const location = useLocation();
-    useAuthInit()
+
 
     console.log(auth.user)
     // ❌ not logged in
-    if (!auth.user?.role) {
-        return <Navigate to="/" state={{ from: location }} replace />;
+    if (!auth.isAuthenticated) {
+        return <Navigate to='/user/login' state={{ from: location }} replace />;
     }
 
     // ❌ role not allowed
-    if (allowedRoles && !allowedRoles.includes(auth.user.role)) {
-        switch (auth.user.role) {
+    let role = auth.user?.role
+    if (!role) {
+        return <Navigate to="/" replace />;
+    }
+    if (allowedRoles && !allowedRoles.includes(role)) {
+        switch (auth.user?.role) {
             case Roles.user_role:
-                return <Navigate to="/user/home_page" replace />;
+                return <Navigate to="/user/Home_page" replace />;
             case Roles.admin_role:
-                return <Navigate to="/admin/home_page" replace />;
+                return <Navigate to="/admin/Home_page" replace />;
             case Roles.investor_role:
-                return <Navigate to="/investor/home_page" replace />;
+                return <Navigate to="/investor/Home_page" replace />;
             case Roles.property_owner_role:
-                return <Navigate to="/owner/home_page" replace />;
+                return <Navigate to="/owner/Home_page" replace />;
             default:
                 return <Navigate to="/" replace />;
         }

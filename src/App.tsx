@@ -1,15 +1,17 @@
 import { GoogleOAuthProvider } from '@react-oauth/google'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ErrorBoundary } from './utils/ErrorBoundary'
 import UserRoutes from './routes/UserRoutes'
 import MainLandingPage from './pages/Main.LandingPage'
 import ProtectGuest from './protectedRoutes/ProtectGuest'
+import { useAuthInit } from './hooks/auth/useAuthInit'
 
 const App: React.FC = () => {
+  useAuthInit()
   return (
     <>
-      {/* <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_ID}> */}
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_ID}>
         <Router>
           <ErrorBoundary>
             <Routes>
@@ -27,7 +29,7 @@ const App: React.FC = () => {
             </Routes>
           </ErrorBoundary>
         </Router>
-      {/* </GoogleOAuthProvider> */}
+      </GoogleOAuthProvider>
     </>
   )
 }

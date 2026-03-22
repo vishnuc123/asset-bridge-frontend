@@ -16,9 +16,9 @@ export const useLogin = (role: TRole) => {
             if (res.success) {
                 dispatch(loginUser(res))
                 console.log("success", res.data)
-                const role = res?.data?.role
+                const role = res?.data?.user?.role
                 if(role){
-                    navigate(`/${role}/home_page`)
+                    navigate(`/${role}/Home_page`)
                     console.log("redirected")
                 }
             } else {

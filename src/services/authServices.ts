@@ -1,6 +1,6 @@
 import { data } from "react-router-dom";
 import { Auth_Apis } from "../constants/apis";
-import type { TloginFormData, TotpFormValues, TSignUpFormValues } from "../types/Auth.types";
+import type { TGoogleLoginValues, TloginFormData, TotpFormValues, TSignUpFormValues } from "../types/Auth.types";
 import { axiosInstance } from "./axiosInstance";
 
 
@@ -31,5 +31,11 @@ export const Login = async (data: TloginFormData, role: string) => {
     const endpoint = getEndpoint(role)
     console.log(endpoint)
     const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.login}`, data)
+    return res.data
+}
+
+export const GoogleLogin = async (data:TGoogleLoginValues,role:string) => {
+    const endpoint = getEndpoint(role)
+    const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.googleLogin}`,data)
     return res.data
 }

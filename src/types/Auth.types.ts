@@ -55,3 +55,8 @@ export type TloginUserResponse = {
         email:string
     }
 }
+
+export type TGoogleLoginValues = {
+    credential: string,
+    role:Exclude<TRole,"Admin">
+}

@@ -29,7 +29,7 @@ const UserRoutes: React.FC = () => {
         </ProtectGuest>
       } />
 
-      <Route path='home_page' element={
+      <Route path='Home_page' element={
         <ProtectUser allowedRoles={[Roles.user_role]}>
           <Home_page />
         </ProtectUser>

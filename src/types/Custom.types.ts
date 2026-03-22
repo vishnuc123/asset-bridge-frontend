@@ -9,3 +9,5 @@ export interface ICustomError extends Error {
         data: TApiErrorResponse,
     }
 }
+
+

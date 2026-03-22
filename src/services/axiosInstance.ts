@@ -13,7 +13,6 @@
 // })
 
 // axiosInstance.interceptors.request.use((config) => {
-//     console.log("🚀 Request:", config.method?.toUpperCase(), config.url);
 //     return config;
 // });
 
@@ -61,25 +60,22 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // 🔴 prevent infinite loop
     if (originalRequest.url?.includes("/refresh")) {
       return Promise.reject(error);
     }
 
-    // 🔴 handle 401
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        console.log("🔁 calling refresh...");
+        console.log("calling refresh");
 
-        await axiosInstance.post("/api/user/refresh"); // ✅ FIXED
+        await axiosInstance.post("/api/user/refresh");
 
-        // retry original request
         return axiosInstance(originalRequest);
 
       } catch (err) {
-        console.log("❌ refresh failed");
+        console.log("refresh failed");
 
         store.dispatch(logout());
         window.location.href = "/";
