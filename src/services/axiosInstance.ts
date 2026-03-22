@@ -39,11 +39,11 @@ import { logout } from "../store/slices/Auth.slice";
 import type { TRole } from "../types/Auth.types";
 
 export const axiosInstance = axios.create({
-    baseURL: env.SERVER_URL,
-    withCredentials: true,
-    headers: {
-        "Content-Type": "application/json"
-    }
+  baseURL: env.SERVER_URL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json"
+  }
 })
 
 // export const axiosInstance = axios.create({
@@ -51,7 +51,6 @@ export const axiosInstance = axios.create({
 //   withCredentials: true,
 // });
 
-// 🔥 SIMPLE RETRY LOGIC
 axiosInstance.interceptors.response.use(
   (res: AxiosResponse) => res,
 
@@ -62,21 +61,28 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    // 🔴 prevent infinite loop
+    if (originalRequest.url?.includes("/refresh")) {
+      return Promise.reject(error);
+    }
+
+    // 🔴 handle 401
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // 🔁 call refresh endpoint
-        console.log(`${env.SERVER_URL}/user/refreash`)
-        await axiosInstance.post("/user/refreash");
+        console.log("🔁 calling refresh...");
 
-        // ✅ retry original request
+        await axiosInstance.post("/api/user/refresh"); // ✅ FIXED
+
+        // retry original request
         return axiosInstance(originalRequest);
-      } catch (err) {
-        // ❌ refresh failed → logout
-        store.dispatch(logout());
 
-        window.location.href = "/"; // fallback
+      } catch (err) {
+        console.log("❌ refresh failed");
+
+        store.dispatch(logout());
+        window.location.href = "/";
 
         return Promise.reject(err);
       }

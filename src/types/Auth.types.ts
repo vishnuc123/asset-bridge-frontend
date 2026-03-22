@@ -47,3 +47,11 @@ export type TloginFormData = {
     email:string,
     password:string
 }
+
+export type TloginUserResponse = {
+    user:{
+        userid:string,
+        role:string,
+        email:string
+    }
+}

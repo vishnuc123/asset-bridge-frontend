@@ -27,4 +27,5 @@ export interface IUser {
 export interface AuthState {
   user: IUser | null;
   isAuthenticated: boolean;
+  isLoading:boolean
 }

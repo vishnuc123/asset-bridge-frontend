@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ErrorBoundary } from './utils/ErrorBoundary'
 import UserRoutes from './routes/UserRoutes'
 import MainLandingPage from './pages/Main.LandingPage'
+import ProtectGuest from './protectedRoutes/ProtectGuest'
 
 const App: React.FC = () => {
   return (
@@ -13,7 +14,12 @@ const App: React.FC = () => {
           <ErrorBoundary>
             <Routes>
               
-              <Route path='/' element={<MainLandingPage />}/>
+              <Route path='/' element={
+                <ProtectGuest>
+
+                  <MainLandingPage />
+                </ProtectGuest>
+                }/>
               <Route path='/user/*' element={<UserRoutes />}/>
               {/* <Route path='/admin' element={<LandingPage />}/>
               <Route path='/property_owner' element={<LandingPage />}/>

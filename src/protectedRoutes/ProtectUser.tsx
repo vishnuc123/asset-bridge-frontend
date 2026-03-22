@@ -1,28 +1,31 @@
-import React, { type JSX } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { Roles } from "../constants/Roles";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
-import { Navigate, useLocation } from "react-router-dom";
+import type { JSX } from "react";
 import type { TRole } from "../types/Auth.types";
-import { Roles } from "../constants/Roles";
+import { useAuthInit } from "../hooks/auth/useAuthInit";
+
 
 interface IProtectedProps {
     children: JSX.Element;
     allowedRoles: Array<TRole>
 }
-
 const ProtectUser: React.FC<IProtectedProps> = ({
     children,
     allowedRoles,
 }) => {
     const auth = useSelector((state: RootState) => state.auth);
     const location = useLocation();
+    useAuthInit()
 
-    // const user = auth.user;
-
-    if (!auth.user) {
+    console.log(auth.user)
+    // ❌ not logged in
+    if (!auth.user?.role) {
         return <Navigate to="/" state={{ from: location }} replace />;
     }
 
+    // ❌ role not allowed
     if (allowedRoles && !allowedRoles.includes(auth.user.role)) {
         switch (auth.user.role) {
             case Roles.user_role:
@@ -41,4 +44,4 @@ const ProtectUser: React.FC<IProtectedProps> = ({
     return children;
 };
 
-export default ProtectUser;
+export default ProtectUser

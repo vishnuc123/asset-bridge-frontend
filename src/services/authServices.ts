@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import { Auth_Apis } from "../constants/apis";
 import type { TloginFormData, TotpFormValues, TSignUpFormValues } from "../types/Auth.types";
 import { axiosInstance } from "./axiosInstance";
