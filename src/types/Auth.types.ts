@@ -37,8 +37,9 @@ export type TOtpVerificationProps = {
 
 
 export type TloginFormProps = {
-    role:string,
+    role:TRole,
     subtitle:string,
+    btnText:string,
     onSubmit:(data:any) => void,
     isLoading:boolean
 }
@@ -59,4 +60,16 @@ export type TloginUserResponse = {
 export type TGoogleLoginValues = {
     credential: string,
     role:Exclude<TRole,"Admin">
+}
+
+
+export type TUserData = {
+    userId:string,
+    firstname:string,
+    lastname:string,
+    email:string,
+    role:string,
+    status:string,
+    createdAt:Date
+    
 }

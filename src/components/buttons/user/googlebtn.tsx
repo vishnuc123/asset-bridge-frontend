@@ -2,9 +2,10 @@ import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import React from "react";
 import { useGoogleLogin } from "../../../hooks/auth/useGoogleLogin";
 import type { IGoogleProps } from "../../../interfaces/auth.interfaces";
+import { Roles } from "../../../constants/Roles";
 
 export const GoogleLoginButton: React.FC<IGoogleProps> = ({ role }) => {
-
+    if(role === Roles.admin_role)return null
     const { mutate: googleLoginFn } = useGoogleLogin(role)
     const handleSuccess = (credentialRes: CredentialResponse) => {
         if (credentialRes.credential) {

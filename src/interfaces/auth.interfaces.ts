@@ -13,14 +13,16 @@ export interface ISignupformsProps{
 
 
 export interface IUser {
-  id: string;
+  userId: string;
   firstname: string;
   lastname: string;
   email: string;
   role: TRole
+  status:"active"|"pending"|"banned";
   kycStatus: string;
   emailVerified: boolean;
   phoneVerified: boolean;
+  createdAt:Date
 }
 
 
@@ -31,5 +33,5 @@ export interface AuthState {
 }
 
 export interface IGoogleProps{
-    role:Exclude<TRole,"Admin">
+    role:TRole
 }

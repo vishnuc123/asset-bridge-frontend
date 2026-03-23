@@ -18,14 +18,16 @@ const ProtectUser: React.FC<IProtectedProps> = ({
     const auth = useSelector((state: RootState) => state.auth);
     const location = useLocation();
 
-
-    console.log(auth.user)
-    // ❌ not logged in
-    if (!auth.isAuthenticated) {
-        return <Navigate to='/user/login' state={{ from: location }} replace />;
+    if(auth.isLoading){
+        return <>Loading...</>
     }
 
-    // ❌ role not allowed
+    console.log(auth.user)
+    if (!auth.isAuthenticated) {
+        return <Navigate to='/' state={{ from: location }} replace />;
+        // /user/login
+    }
+
     let role = auth.user?.role
     if (!role) {
         return <Navigate to="/" replace />;

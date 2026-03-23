@@ -8,7 +8,7 @@ const Login:React.FC = () => {
   
   return (
     <div>
-      <Logincomp role='user' subtitle='' onSubmit={LoginUserLogic} isLoading={isLoginLoading}/>
+      <Logincomp role={Roles.user_role} subtitle='Login as User explore stays and Book' btnText='Login and Explore stays' onSubmit={LoginUserLogic} isLoading={isLoginLoading}/>
     </div>
   )
 }

@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, signupSchema } from "../../validations/auth/Auth.schema";
 import { GoogleLoginButton } from "../buttons/user/googlebtn";
-const Logincomp: React.FC<TloginFormProps> = ({ role = "User", subtitle, onSubmit, isLoading = false }) => {
+import { Roles } from "../../constants/Roles";
+const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle,btnText ,onSubmit, isLoading = false }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<TloginFormData>({
         resolver: zodResolver(LoginSchema)
     })
@@ -35,7 +36,7 @@ const Logincomp: React.FC<TloginFormProps> = ({ role = "User", subtitle, onSubmi
                         src="https://www.svgrepo.com/show/475656/google-color.svg"
                         className="w-5 h-5"
                     /> */}
-                    <GoogleLoginButton role="User"/>
+                    <GoogleLoginButton role={role}/>
                 {/* </button> */}
 
                 {/* Divider */}
@@ -71,7 +72,8 @@ const Logincomp: React.FC<TloginFormProps> = ({ role = "User", subtitle, onSubmi
                 <button className="w-full bg-[#A3E635] text-[#0F172A] py-2 rounded-lg text-sm font-medium hover:bg-[#84CC16] transition"
                 onClick={handleSubmit(onSubmit)}
                 >
-                    Login & Explore Stays
+                    {/* Login & Explore Stays */}
+                    {btnText}
                 </button>
 
                 {/* Footer */}

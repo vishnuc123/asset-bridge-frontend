@@ -25,15 +25,15 @@ export default function Header({ isAuthenticated }: HeaderProps) {
 
         {/* Navigation */}
         <div className="hidden md:flex gap-8 text-sm text-muted-foreground">
-          <span onClick={() => navigate("/hotels")} className="hover:text-foreground cursor-pointer">
-            Hotels
+          <span onClick={() => navigate("/admin/Manage-Users")} className="hover:text-foreground cursor-pointer text-lg">
+            operations
           </span>
-          <span onClick={() => navigate("/bookings")} className="hover:text-foreground cursor-pointer">
-            Bookings
+          <span onClick={() => navigate("/bookings")} className="hover:text-foreground cursor-pointer text-lg">
+            Finance-Business
           </span>
-          <span onClick={() => navigate("/wishlist")} className="hover:text-foreground cursor-pointer">
+          {/* <span onClick={() => navigate("/wishlist")} className="hover:text-foreground cursor-pointer">
             Wishlist
-          </span>
+          </span> */}
         </div>
 
         {/* Right Side */}
