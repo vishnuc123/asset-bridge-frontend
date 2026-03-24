@@ -7,6 +7,8 @@ import MainLandingPage from './pages/Main.LandingPage'
 import ProtectGuest from './protectedRoutes/ProtectGuest'
 import { useAuthInit } from './hooks/auth/useAuthInit'
 import AdminRoutes from './routes/AdminRoutes'
+import InvestorRoutes from './routes/InvestorRoutes'
+import SelectRoleModal from './pages/SelectRoute'
 
 const App: React.FC = () => {
   useAuthInit()
@@ -25,8 +27,8 @@ const App: React.FC = () => {
                 }/>
               <Route path='/user/*' element={<UserRoutes />}/>
               <Route path='/admin/*' element={<AdminRoutes />}/>
-              {/* <Route path='/admin' element={<LandingPage />}/>
-              <Route path='/investor' element={<LandingPage />}/> */}
+              <Route path='/investor/*' element={<InvestorRoutes />}/>
+              {/* {/* <Route path='/owner' element={<LandingPage />}/> */}
             </Routes>
           </ErrorBoundary>
         </Router>

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, signupSchema } from "../../validations/auth/Auth.schema";
 import { GoogleLoginButton } from "../buttons/user/googlebtn";
 import { Roles } from "../../constants/Roles";
-const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle,btnText ,onSubmit, isLoading = false }) => {
+const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle, btnText, onSubmit, isLoading = false }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<TloginFormData>({
         resolver: zodResolver(LoginSchema)
     })
@@ -26,6 +26,10 @@ const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle,btnText ,onSubmit
                     Welcome Back 👋
                 </h2>
 
+                <p className="text-center text-lg text-primary mb-2 uppercase">
+                    {`login as ${role}`}
+                </p>
+
                 <p className="text-center text-gray-600 text-sm mb-6">
                     {subtitle}
                 </p>
@@ -36,7 +40,7 @@ const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle,btnText ,onSubmit
                         src="https://www.svgrepo.com/show/475656/google-color.svg"
                         className="w-5 h-5"
                     /> */}
-                    <GoogleLoginButton role={role}/>
+                <GoogleLoginButton role={role} />
                 {/* </button> */}
 
                 {/* Divider */}
@@ -70,7 +74,7 @@ const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle,btnText ,onSubmit
 
                 {/* Login Button */}
                 <button className="w-full bg-[#A3E635] text-[#0F172A] py-2 rounded-lg text-sm font-medium hover:bg-[#84CC16] transition"
-                onClick={handleSubmit(onSubmit)}
+                    onClick={handleSubmit(onSubmit)}
                 >
                     {/* Login & Explore Stays */}
                     {btnText}
@@ -79,7 +83,7 @@ const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle,btnText ,onSubmit
                 {/* Footer */}
                 <p className="text-xs text-gray-500 text-center mt-6">
                     New to Asset Bridge?{" "}
-                    <span onClick={() => navigate("/user/signup")} className="text-[#0F172A] font-medium cursor-pointer hover:underline">
+                    <span onClick={() => navigate(`/${role}/signup`)} className="text-[#0F172A] font-medium cursor-pointer hover:underline">
                         Create an account
                     </span>
                 </p>

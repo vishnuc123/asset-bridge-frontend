@@ -15,7 +15,7 @@ export type TSignUpFormValues = {
     phone: string;
     password: string;
     confirmPassword: string;
-    role: string;
+    role: TRole;
 }
 
 export type TotpFormValues = {
@@ -52,7 +52,8 @@ export type TloginFormData = {
 export type TloginUserResponse = {
     user:{
         userid:string,
-        role:string,
+        roles:TRole[],
+        activeRole?:TRole
         email:string
     }
 }
@@ -68,7 +69,7 @@ export type TUserData = {
     firstname:string,
     lastname:string,
     email:string,
-    role:string,
+    role:TRole[],
     status:string,
     createdAt:Date
     

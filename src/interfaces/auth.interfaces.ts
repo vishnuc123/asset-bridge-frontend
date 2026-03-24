@@ -17,7 +17,7 @@ export interface IUser {
   firstname: string;
   lastname: string;
   email: string;
-  role: TRole
+  roles: TRole[]
   status:"active"|"pending"|"banned";
   kycStatus: string;
   emailVerified: boolean;
@@ -28,6 +28,7 @@ export interface IUser {
 
 export interface AuthState {
   user: IUser | null;
+  activeRole:TRole|null
   isAuthenticated: boolean;
   isLoading:boolean
 }

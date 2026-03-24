@@ -6,6 +6,7 @@ const AdminNavbar = () => {
       <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
 
         <div className="font-semibold text-lg text-foreground">
+          
           ADMIN<span className="text-primary"> PANEL</span>
         </div>
 

@@ -1,6 +1,6 @@
 import { data } from "react-router-dom";
 import { Auth_Apis } from "../constants/apis";
-import type { TGoogleLoginValues, TloginFormData, TotpFormValues, TSignUpFormValues } from "../types/Auth.types";
+import type { TGoogleLoginValues, TloginFormData, TotpFormValues, TRole, TSignUpFormValues } from "../types/Auth.types";
 import { axiosInstance } from "./axiosInstance";
 
 
@@ -34,8 +34,20 @@ export const Login = async (data: TloginFormData, role: string) => {
     return res.data
 }
 
-export const GoogleLogin = async (data:TGoogleLoginValues,role:string) => {
+export const GoogleLogin = async (data: TGoogleLoginValues, role: string) => {
     const endpoint = getEndpoint(role)
-    const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.googleLogin}`,data)
+    const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.googleLogin}`, data)
     return res.data
 }
+
+export const SetRole = async (role: TRole) => {
+    const res = await axiosInstance.post(
+        "/api/user/set-role",
+        { role },
+        {
+            withCredentials: true,
+        }
+    );
+    console.log("setroleservice",res.data)
+    return res.data;
+};

@@ -30,8 +30,8 @@ const SignupComp: React.FC<ISignupformsProps> = ({ role = "User", subtitle, onSu
                 </h1>
 
                 {/* ✅ Role */}
-                <p className="text-center text-xs text-primary mb-2 uppercase">
-                    {role}
+                <p className="text-center text-lg text-primary mb-2 uppercase">
+                    {`login as ${role}`}
                 </p>
 
                 {/* Title */}

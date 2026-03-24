@@ -5,6 +5,7 @@ import type { RootState } from "../store/store";
 import type { JSX } from "react";
 import type { TRole } from "../types/Auth.types";
 import { useAuthInit } from "../hooks/auth/useAuthInit";
+import SelectRoleModal from "../pages/SelectRoute";
 
 
 interface IProtectedProps {
@@ -18,33 +19,35 @@ const ProtectUser: React.FC<IProtectedProps> = ({
     const auth = useSelector((state: RootState) => state.auth);
     const location = useLocation();
 
-    if(auth.isLoading){
+    if (auth.isLoading) {
         return <>Loading...</>
     }
-
+    
+    
     console.log(auth.user)
     if (!auth.isAuthenticated) {
         return <Navigate to='/' state={{ from: location }} replace />;
         // /user/login
     }
-
-    let role = auth.user?.role
-    if (!role) {
-        return <Navigate to="/" replace />;
+    console.log("activeRole", auth.activeRole);
+    if (!auth.activeRole) {
+        return <SelectRoleModal />
     }
-    if (allowedRoles && !allowedRoles.includes(role)) {
-        switch (auth.user?.role) {
-            case Roles.user_role:
-                return <Navigate to="/user/Home_page" replace />;
-            case Roles.admin_role:
-                return <Navigate to="/admin/Home_page" replace />;
-            case Roles.investor_role:
-                return <Navigate to="/investor/Home_page" replace />;
-            case Roles.property_owner_role:
-                return <Navigate to="/owner/Home_page" replace />;
-            default:
-                return <Navigate to="/" replace />;
-        }
+
+    if (allowedRoles && !allowedRoles.includes(auth?.activeRole)) {
+        // switch (auth.user?.roles.includes(auth.activeRole)) {
+        //     case Roles.user_role:
+        //         return <Navigate to="/user/Home_page" replace />;
+        //     case Roles.admin_role:
+        //         return <Navigate to="/admin/Home_page" replace />;
+        //     case Roles.investor_role:
+        //         return <Navigate to="/investor/Home_page" replace />;
+        //     case Roles.property_owner_role:
+        //         return <Navigate to="/owner/Home_page" replace />;
+        //     default:
+        //         return <Navigate to="/" replace />;
+        // }
+        return <Navigate to="/" replace />
     }
 
     return children;

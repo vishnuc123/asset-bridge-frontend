@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import type { TloginUserResponse } from "../../types/Auth.types";
 import { axiosInstance } from "../../services/axiosInstance";
-import { loginUser, setLoading, } from "../../store/slices/Auth.slice";
+import { loginUser, setActiveRole, setLoading, } from "../../store/slices/Auth.slice";
 
 // export const useAuthInit = () => {
 //   const dispatch = useDispatch();
@@ -44,6 +44,12 @@ export const useAuthInit = () => {
 
         dispatch(loginUser(res.data));
 
+        const roles = res.data.user.roles;
+
+        if (roles.length === 1) {
+          dispatch(setActiveRole(roles[0]));
+        } 
+
       } catch (err) {
         console.log("session expired or not logged in");
       } finally {
@@ -52,5 +58,5 @@ export const useAuthInit = () => {
     };
 
     init();
-  }, [dispatch]); // ✅ best practice
+  }, [dispatch]); 
 };

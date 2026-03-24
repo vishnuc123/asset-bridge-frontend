@@ -4,29 +4,38 @@ import type { AuthState } from "../../interfaces/auth.interfaces";
 
 
 
-const initialState:AuthState = {
-    user:null,
-    isAuthenticated:false,
-    isLoading:true
+const initialState: AuthState = {
+    user: null,
+    activeRole: null,
+    isAuthenticated: false,
+    isLoading: true
 }
 const authSlice = createSlice({
-    name:"auth",
+    name: "auth",
     initialState,
-    reducers:{
-        loginUser:(state,action) => {
+    reducers: {
+        loginUser: (state, action) => {
+            const user = action.payload.data
+            // console.log("hello",action.payload.data.roles)
             state.user = action.payload.data
             state.isAuthenticated = true;
             state.isLoading = false
+            if (user.roles.length === 1) {
+                state.activeRole = user.roles[0]
+            } else {
+                state.activeRole = null
+            }
         },
-        //  setUser: (state, action) => {
-        //     state.user = action.payload.user;
-        //     state.isAuthenticated = true;
-        // },
 
-        setLoading: (state, action) => { 
+        setActiveRole: (state, action) => {
+            console.log("setactiverolepayload", action.payload)
+            state.activeRole = action.payload;
+        },
+
+        setLoading: (state, action) => {
             state.isLoading = action.payload;
         },
-        logout:(state) => {
+        logout: (state) => {
             state.user = null
             state.isAuthenticated = false
             state.isLoading = false
@@ -35,5 +44,5 @@ const authSlice = createSlice({
 })
 
 
-export const {loginUser,logout,setLoading} = authSlice.actions
+export const { loginUser, logout, setLoading, setActiveRole } = authSlice.actions
 export default authSlice.reducer;

@@ -4,7 +4,7 @@ import { Login } from "../../services/authServices"
 import type { ICustomError } from "../../types/Custom.types"
 import { useDispatch } from "react-redux"
 import type { AppDispatch } from "../../store/store"
-import { loginUser } from "../../store/slices/Auth.slice"
+import { loginUser, setActiveRole } from "../../store/slices/Auth.slice"
 import { useNavigate } from "react-router-dom"
 
 export const useLogin = (role: TRole) => {
@@ -16,11 +16,23 @@ export const useLogin = (role: TRole) => {
             if (res.success) {
                 dispatch(loginUser(res))
                 console.log("success", res.data)
-                const role = res?.data?.user?.role ?? res?.data?.role
-                if(role){
-                    navigate(`/${role}/Home_page`)
-                    console.log("redirected")
+
+
+                const roles = res.data.roles
+                console.log("roles", roles)
+
+                if (roles.length <= 1) {
+                    const selectedrole = roles[0].toLowerCase()
+                    console.log("selectedRole", selectedrole);
+
+                    dispatch(setActiveRole(selectedrole))
+                    navigate(`/${selectedrole}/Home_page`);
+                } else {
+                    navigate(`/${roles[0].toLowerCase()}/Home_page`)
                 }
+
+
+
             } else {
                 console.log("something went wrong")
             }

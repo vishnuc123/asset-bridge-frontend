@@ -5,7 +5,7 @@ import { ArrowRight, Shield, TrendingUp, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function MainLandingPage() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
@@ -42,10 +42,14 @@ export default function MainLandingPage() {
                 <button onClick={() => navigate("/user/landing_page")} className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition flex items-center justify-center gap-2">
                   Explore Hotels <ArrowRight size={18} />
                 </button>
-                <button className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
+                <button
+
+                  className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
                   List Your Property
                 </button>
-                <button className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
+                <button
+                  onClick={() => navigate("/investor/landing_page")}
+                  className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
                   Start Investing
                 </button>
               </div>
@@ -160,7 +164,7 @@ export default function MainLandingPage() {
           </div>
         </div>
       </section> */}
-      
+
 
       {/* How It Works */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -182,7 +186,7 @@ export default function MainLandingPage() {
         </div>
       </section>
 
-      
+
 
       {/* Final CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white">
