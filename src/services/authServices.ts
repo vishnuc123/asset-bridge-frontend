@@ -41,13 +41,12 @@ export const GoogleLogin = async (data: TGoogleLoginValues, role: string) => {
 }
 
 export const SetRole = async (role: TRole) => {
-    const res = await axiosInstance.post(
-        "/api/user/set-role",
-        { role },
-        {
-            withCredentials: true,
-        }
-    );
+    const res = await axiosInstance.post("/api/user/set-role",{ role } );
     console.log("setroleservice",res.data)
     return res.data;
 };
+export const Logout = async (role:TRole) => {
+    const endpoint = getEndpoint(role)
+    const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.logout}`)
+    return res.data
+}

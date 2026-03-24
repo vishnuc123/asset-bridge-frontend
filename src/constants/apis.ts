@@ -3,4 +3,5 @@ export const Auth_Apis = {
     verifyOtp : "/otp/verifyotp",
     login:"/login",
     googleLogin:"/google-login",
+    logout:"/logout",
 }

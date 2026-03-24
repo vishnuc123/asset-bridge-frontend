@@ -2,9 +2,12 @@
 import React from "react";
 import type { INavbarProps } from "../../interfaces/auth.interfaces";
 import { useNavigate } from "react-router-dom";
+import { useLogout } from "../../hooks/auth/useLogout";
+import { Roles } from "../../constants/Roles";
 
 
-const UserNavbar: React.FC<INavbarProps> = ({ isAuthenticated }) => {
+const UserNavbar: React.FC<INavbarProps> = ({role, isAuthenticated }) => {
+    const {mutate:LogoutUser,isPending:LogoutLoading} = useLogout(role)
     const navigate = useNavigate()
     return (
         <div className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
@@ -44,7 +47,9 @@ const UserNavbar: React.FC<INavbarProps> = ({ isAuthenticated }) => {
                                 Profile
                             </button>
 
-                            <button className="px-3 py-1.5 text-sm rounded-full text-red-500 hover:bg-red-500/10 transition">
+                            <button
+                            onClick={() => LogoutUser()}
+                             className="px-3 py-1.5 text-sm rounded-full text-red-500 hover:bg-red-500/10 transition">
                                 Logout
                             </button>
                         </>

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../store/store'
 import { useAuthInit } from '../../hooks/auth/useAuthInit'
 import UserNavbar from '../../components/navbars/userNavbar'
+import { Roles } from '../../constants/Roles'
 
 const Home_page:React.FC = () => {
   
@@ -15,7 +16,7 @@ const Home_page:React.FC = () => {
   return (
     <div>
       {/* <Header isAuthenticated={authStatus}/> */}
-      <UserNavbar isAuthenticated={true}/>
+      <UserNavbar role={Roles.user_role} isAuthenticated={true}/>
       
     </div>
   )

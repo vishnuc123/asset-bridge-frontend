@@ -2,9 +2,11 @@
 import React from "react";
 import type { INavbarProps } from "../../interfaces/auth.interfaces";
 import { useNavigate } from "react-router-dom";
+import { useLogout } from "../../hooks/auth/useLogout";
 
 
-const InvestorNavbar: React.FC<INavbarProps> = ({ isAuthenticated }) => {
+const InvestorNavbar: React.FC<INavbarProps> = ({role, isAuthenticated }) => {
+    const {mutate:LogoutUser,isPending:logoutLoading} =useLogout(role)
     const navigate = useNavigate()
     return (
         <div className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
@@ -46,7 +48,9 @@ const InvestorNavbar: React.FC<INavbarProps> = ({ isAuthenticated }) => {
                                 Profile
                             </button>
 
-                            <button className="px-3 py-1.5 text-sm rounded-full text-red-500 hover:bg-red-500/10 transition">
+                            <button
+                            onClick={() => LogoutUser()}
+                             className="px-3 py-1.5 text-sm rounded-full text-red-500 hover:bg-red-500/10 transition">
                                 Logout
                             </button>
                         </>
