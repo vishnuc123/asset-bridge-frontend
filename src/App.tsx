@@ -8,26 +8,41 @@ import ProtectGuest from './protectedRoutes/ProtectGuest'
 import { useAuthInit } from './hooks/auth/useAuthInit'
 import AdminRoutes from './routes/AdminRoutes'
 import InvestorRoutes from './routes/InvestorRoutes'
-import SelectRoleModal from './pages/SelectRoute'
+import { Toaster } from "react-hot-toast";
+import ForgetPassword from './pages/ForgetPassword'
+import { useSelector } from 'react-redux'
+import type { RootState } from './store/store'
+
 
 const App: React.FC = () => {
   useAuthInit()
+  const auth = useSelector((s: RootState) => s.auth)
+  if (auth.isLoading) {
+    return <div>loading ....</div>
+  }
   return (
     <>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_ID}>
         <Router>
           <ErrorBoundary>
+            <Toaster position="top-center" />
             <Routes>
-              
+
               <Route path='/' element={
                 <ProtectGuest>
 
                   <MainLandingPage />
                 </ProtectGuest>
-                }/>
-              <Route path='/user/*' element={<UserRoutes />}/>
-              <Route path='/admin/*' element={<AdminRoutes />}/>
-              <Route path='/investor/*' element={<InvestorRoutes />}/>
+              } />
+              <Route path='/forget-password' element={
+                <ProtectGuest>
+                  <ForgetPassword />
+                </ProtectGuest>
+
+              } />
+              <Route path='/user/*' element={<UserRoutes />} />
+              <Route path='/admin/*' element={<AdminRoutes />} />
+              <Route path='/investor/*' element={<InvestorRoutes />} />
               {/* {/* <Route path='/owner' element={<LandingPage />}/> */}
             </Routes>
           </ErrorBoundary>

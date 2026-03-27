@@ -1,6 +1,6 @@
 import { data } from "react-router-dom";
 import { Auth_Apis } from "../constants/apis";
-import type { TGoogleLoginValues, TloginFormData, TotpFormValues, TRole, TSignUpFormValues } from "../types/Auth.types";
+import type { TForgetPasswordData, TGoogleLoginValues, TloginFormData, TotpFormValues, TResetPassData, TRole, TSignUpFormValues } from "../types/Auth.types";
 import { axiosInstance } from "./axiosInstance";
 
 
@@ -41,12 +41,28 @@ export const GoogleLogin = async (data: TGoogleLoginValues, role: string) => {
 }
 
 export const SetRole = async (role: TRole) => {
-    const res = await axiosInstance.post("/api/user/set-role",{ role } );
-    console.log("setroleservice",res.data)
+    const res = await axiosInstance.post(
+        "/api/user/set-role",
+        { role },
+        {
+            withCredentials: true,
+        }
+    );
+    console.log("setroleservice", register)
     return res.data;
 };
-export const Logout = async (role:TRole) => {
-    const endpoint = getEndpoint(role)
-    const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.logout}`)
+export const LogoutUser = async (role: TRole) => {
+    // const endpoint = getEndpoint(role)
+    const res = await axiosInstance.post(`/api/user${Auth_Apis.logout}`)
+    return res.data
+}
+
+export const ForgetPassword = async (data:TForgetPasswordData) => {
+    const res = await axiosInstance.post(`/api/user${Auth_Apis.forgetPassword}`,data)
+    return res.data
+}
+
+export const ResetPass = async(data:TResetPassData) => {
+    const res = await axiosInstance.post(`/api/user${Auth_Apis.resetPassword}`,data)
     return res.data
 }

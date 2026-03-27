@@ -41,6 +41,10 @@ export const LoginSchema = z.object({
 
 })
 
+export const ForgetSchema = z.object({
+  email: z.string().email("invalid email"),
+})
+
 
 export type loginFormData = z.infer<typeof LoginSchema>;
 export type SignupFormData = z.infer<typeof signupSchema>;

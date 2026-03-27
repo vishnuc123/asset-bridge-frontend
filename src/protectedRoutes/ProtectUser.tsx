@@ -22,6 +22,7 @@ const ProtectUser: React.FC<IProtectedProps> = ({
     if (auth.isLoading) {
         return <>Loading...</>
     }
+    console.log("activeRole",auth.activeRole);
     
     
     console.log(auth.user)
@@ -29,7 +30,6 @@ const ProtectUser: React.FC<IProtectedProps> = ({
         return <Navigate to='/' state={{ from: location }} replace />;
         // /user/login
     }
-    console.log("activeRole", auth.activeRole);
     if (!auth.activeRole) {
         return <SelectRoleModal />
     }

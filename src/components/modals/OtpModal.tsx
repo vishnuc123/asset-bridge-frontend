@@ -3,12 +3,12 @@ import type { TOtpVerificationProps } from "../../types/Auth.types";
 
 
 
-const OtpModal: React.FC<TOtpVerificationProps> = ({
+const ResetPassModal: React.FC<TOtpVerificationProps> = ({
   isOpen,
   onClose,
   onSubmit,
   length = 6,
-  userId,
+  // userId,
   isOtploading = false,
 }) => {
 
@@ -151,4 +151,4 @@ const OtpModal: React.FC<TOtpVerificationProps> = ({
   );
 };
 
-export default OtpModal;
+export default ResetPassModal;

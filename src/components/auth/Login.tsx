@@ -68,7 +68,9 @@ const Logincomp: React.FC<TloginFormProps> = ({ role, subtitle, btnText, onSubmi
                 {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
 
                 {/* Forgot */}
-                <div className="text-right text-xs text-gray-500 mb-4 cursor-pointer hover:text-[#0F172A]">
+                <div
+                onClick={() => navigate("/forget-password")}
+                 className="text-right text-xs text-gray-500 mb-4 cursor-pointer hover:text-[#0F172A]">
                     Forgot password?
                 </div>
 

@@ -8,13 +8,8 @@ const SelectRoleModal: React.FC = () => {
     const { mutate: setRole, isPending } = useSetRole();
 
     const auth = useSelector((state: RootState) => state.auth);
-    console.log("MODAL DEBUG:", {
-        user: auth.user,
-        roles: auth.user?.roles,
-        rolesLength: auth.user?.roles?.length,
-        activeRole: auth.activeRole
-    });
-    if (!auth || !auth.user?.roles || auth.user?.roles.length <= 1 || auth.activeRole) return null;
+
+    if (auth.isLoading ||!auth || !auth.user?.roles || auth.user?.roles.length <= 1 || auth.activeRole) return null;
 
     const handleSelectRole = (role: TRole) => {
         setRole(role);
@@ -35,7 +30,7 @@ const SelectRoleModal: React.FC = () => {
                             disabled={isPending}
                             className="bg-green-500 hover:bg-green-600 text-black py-2 rounded-lg transition"
                         >
-                            {isPending ? "Switching..." : role.toUpperCase()}
+                            {isPending ? "Switching..." : role === "User" ? "Customer" : role.toUpperCase()}
                         </button>
                     ))}
                 </div>

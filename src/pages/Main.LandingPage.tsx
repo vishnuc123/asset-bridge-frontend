@@ -18,12 +18,12 @@ export default function MainLandingPage() {
             <a href="#" className="text-gray-600 hover:text-gray-900 text-sm font-medium">About</a>
             <a href="#" className="text-gray-600 hover:text-gray-900 text-sm font-medium">Contact</a>
           </div>
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <button className="text-gray-600 hover:text-gray-900 text-sm font-medium">Login</button>
             <button className="bg-gray-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">
               Get Started
             </button>
-          </div>
+          </div> */}
         </div>
       </nav>
 
@@ -39,17 +39,17 @@ export default function MainLandingPage() {
                 A hybrid platform where investors fund properties, owners raise capital, and travelers enjoy premium stays at lower prices.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => navigate("/user/landing_page")} className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition flex items-center justify-center gap-2">
+                <button onClick={() => navigate("/user/landing_page")} className="border-2 border-gray-900 text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-800 hover:text-white transition flex items-center justify-center gap-2">
                   Explore Hotels <ArrowRight size={18} />
                 </button>
                 <button
 
-                  className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
+                  className="border-2 border-gray-900 text-gray-900 hover:bg-gray-800 hover:text-white px-8 py-3 rounded-lg font-medium  transition">
                   List Your Property
                 </button>
                 <button
                   onClick={() => navigate("/investor/landing_page")}
-                  className="border-2 border-gray-900 text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
+                  className="border-2 border-gray-900 text-gray-900 hover:bg-gray-800 hover:text-white  px-8 py-3 rounded-lg font-medium  transition">
                   Start Investing
                 </button>
               </div>
@@ -58,10 +58,23 @@ export default function MainLandingPage() {
               </button> */}
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 aspect-square flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-5xl font-bold text-gray-900 mb-2">12.5%</div>
-                <p className="text-gray-600">Average Annual ROI</p>
-              </div>
+              <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl aspect-square overflow-hidden">
+  
+  <img
+    src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
+    alt="Hotel Investment Property"
+    className="w-full h-full object-cover"
+  />
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+    <div className="text-center text-white">
+      <div className="text-5xl font-bold mb-2">12.5%</div>
+      <p>Average Annual ROI</p>
+    </div>
+  </div>
+
+</div>
             </div>
           </div>
         </div>

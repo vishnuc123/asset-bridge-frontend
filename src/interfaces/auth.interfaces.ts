@@ -1,14 +1,14 @@
 import type { TRole } from "../types/Auth.types";
 
-export interface INavbarProps{
-    isAuthenticated:boolean,
-    role:TRole
+export interface INavbarProps {
+  isAuthenticated: boolean,
+  role: TRole
 }
-export interface ISignupformsProps{
-    role:string,
-    subtitle:string,
-    onSubmit:(data:any) => void
-    isLoading:boolean
+export interface ISignupformsProps {
+  role: string,
+  subtitle: string,
+  onSubmit: (data: any) => void
+  isLoading: boolean
 }
 
 
@@ -18,21 +18,29 @@ export interface IUser {
   lastname: string;
   email: string;
   roles: TRole[]
-  status:"active"|"pending"|"banned";
+  status: "active" | "pending" | "banned";
   kycStatus: string;
   emailVerified: boolean;
   phoneVerified: boolean;
-  createdAt:Date
+  createdAt: Date
 }
 
 
 export interface AuthState {
   user: IUser | null;
-  activeRole:TRole|null
+  activeRole: TRole | null
+  isRoleinitilized: boolean,
   isAuthenticated: boolean;
-  isLoading:boolean
+  isLoading: boolean
 }
 
-export interface IGoogleProps{
-    role:TRole
+export interface IGoogleProps {
+  role: TRole
+}
+export interface IForgetPasswordProps {
+  role:TRole
+  subtitle:string,
+  btnText:string,
+  onSubmit:(data:any) => void
+  isLoading :boolean
 }

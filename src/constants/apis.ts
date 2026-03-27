@@ -4,4 +4,6 @@ export const Auth_Apis = {
     login:"/login",
     googleLogin:"/google-login",
     logout:"/logout",
+    forgetPassword:"/forget-password",
+    resetPassword:"/reset-password"
 }

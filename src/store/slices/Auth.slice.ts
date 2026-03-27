@@ -8,6 +8,7 @@ const initialState: AuthState = {
     user: null,
     activeRole: null,
     isAuthenticated: false,
+    isRoleinitilized: false,
     isLoading: true
 }
 const authSlice = createSlice({
@@ -27,6 +28,9 @@ const authSlice = createSlice({
             }
         },
 
+        setRoleInitilize: (state, action) => {
+            state.isRoleinitilized = action.payload
+        },
         setActiveRole: (state, action) => {
             console.log("setactiverolepayload", action.payload)
             state.activeRole = action.payload;
@@ -38,11 +42,13 @@ const authSlice = createSlice({
         logout: (state) => {
             state.user = null
             state.isAuthenticated = false
+            state.activeRole = null,
+            state.isRoleinitilized=false,
             state.isLoading = false
         }
     }
 })
 
 
-export const { loginUser, logout, setLoading, setActiveRole } = authSlice.actions
+export const { loginUser, logout, setLoading, setActiveRole,setRoleInitilize } = authSlice.actions
 export default authSlice.reducer;

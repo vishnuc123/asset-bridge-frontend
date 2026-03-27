@@ -50,7 +50,7 @@ export type TloginFormData = {
 }
 
 export type TloginUserResponse = {
-    user:{
+    data:{
         userid:string,
         roles:TRole[],
         activeRole?:TRole
@@ -69,8 +69,17 @@ export type TUserData = {
     firstname:string,
     lastname:string,
     email:string,
-    role:TRole[],
+    roles:TRole[],
     status:string,
     createdAt:Date
     
+}
+
+export type TForgetPasswordData={
+    email:string
+}
+
+export type TResetPassData = {
+    email:string,
+    password:string
 }

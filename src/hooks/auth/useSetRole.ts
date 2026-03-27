@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { loginUser, setActiveRole } from "../../store/slices/Auth.slice";
 import { useNavigate } from "react-router-dom";
 import type { TRole } from "../../types/Auth.types";
+import toast from "react-hot-toast";
+import type { ICustomError } from "../../types/Custom.types";
 
 export const useSetRole = () => {
     const dispatch = useDispatch();
@@ -15,7 +17,13 @@ export const useSetRole = () => {
         onSuccess: (res, role) => {
             dispatch(setActiveRole(role));
 
-            console.log("usesetrole", res.data)
+            // const normalizedRole = role.toLowerCase() as TRole
+            // console.log("usesetrole", res.data)
+            // const role = res.data.roles
+            // console.log("setrole",role);
+
+            localStorage.setItem("activeRole", role)
+            toast.success(`Switched to ${role}`);
             // dispatch(loginUser(res.data))
             switch (role) {
                 case "Investor":
@@ -27,7 +35,7 @@ export const useSetRole = () => {
                     break;
 
                 case "User":
-                    navigate("/admin/Home_page");
+                    navigate("/user/Home_page");
                     break;
 
                 default:
@@ -35,5 +43,9 @@ export const useSetRole = () => {
             }
 
         },
+        onError: (err: ICustomError) => {
+            toast.error(err?.message || "something went wrong")
+
+        }
     });
 };

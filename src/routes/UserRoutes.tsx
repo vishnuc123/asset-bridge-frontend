@@ -36,6 +36,12 @@ const UserRoutes: React.FC = () => {
         // <Home_page />
 
       } />
+      <Route path='forget-password' element={
+        <ProtectGuest>
+          <Home_page />
+        </ProtectGuest>
+
+      } />
     </Routes>
   )
 }
