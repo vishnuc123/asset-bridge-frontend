@@ -5,7 +5,7 @@ import type { RootState } from "../store/store";
 import type { JSX } from "react";
 import type { TRole } from "../types/Auth.types";
 import { useAuthInit } from "../hooks/auth/useAuthInit";
-import SelectRoleModal from "../pages/SelectRoute";
+import SelectRoleModal from "../pages/SelectRole";
 
 
 interface IProtectedProps {

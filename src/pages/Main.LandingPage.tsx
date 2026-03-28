@@ -43,7 +43,7 @@ export default function MainLandingPage() {
                   Explore Hotels <ArrowRight size={18} />
                 </button>
                 <button
-
+                onClick={() => navigate("/owner/landing_page")}
                   className="border-2 border-gray-900 text-gray-900 hover:bg-gray-800 hover:text-white px-8 py-3 rounded-lg font-medium  transition">
                   List Your Property
                 </button>

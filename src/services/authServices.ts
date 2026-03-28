@@ -6,7 +6,7 @@ import { axiosInstance } from "./axiosInstance";
 
 const ENDPOINTS = {
     user: '/user',
-    property_owner: '/property_owner',
+    property_owner: '/owner',
     admin: '/admin',
     investor: '/investor',
 }

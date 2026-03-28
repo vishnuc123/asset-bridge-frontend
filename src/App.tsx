@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import ForgetPassword from './pages/ForgetPassword'
 import { useSelector } from 'react-redux'
 import type { RootState } from './store/store'
+import OwnerRoutes from './routes/OwnerRoutes'
 
 
 const App: React.FC = () => {
@@ -43,7 +44,7 @@ const App: React.FC = () => {
               <Route path='/user/*' element={<UserRoutes />} />
               <Route path='/admin/*' element={<AdminRoutes />} />
               <Route path='/investor/*' element={<InvestorRoutes />} />
-              {/* {/* <Route path='/owner' element={<LandingPage />}/> */}
+              <Route path='/owner/*' element={<OwnerRoutes />} />
             </Routes>
           </ErrorBoundary>
         </Router>

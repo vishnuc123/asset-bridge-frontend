@@ -11,12 +11,12 @@ export interface Column<T> {
 interface TableProps<T> {
   columns: Column<T>[];
   data: T[];
-  handlePrev:()=>void;
-  handleNext:()=>void
+  handlePrev: () => void;
+  handleNext: () => void
 }
 
 // 🔹 Reusable Modern Table Component
-export function Table<T>({ columns, data,handlePrev,handleNext }: TableProps<T>) {
+export function Table<T>({ columns, data, handlePrev, handleNext }: TableProps<T>) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
       <div className="overflow-x-auto">
@@ -32,7 +32,6 @@ export function Table<T>({ columns, data,handlePrev,handleNext }: TableProps<T>)
             </tr>
           </thead>
 
-          {/* Body */}
           <tbody className="divide-y">
             {data.length > 0 ? (
               data.map((row, rowIndex) => (
@@ -45,8 +44,8 @@ export function Table<T>({ columns, data,handlePrev,handleNext }: TableProps<T>)
                       {col.render
                         ? col.render(row)
                         : col.accessor
-                        ? (row[col.accessor] as React.ReactNode)
-                        : null}
+                          ? (row[col.accessor] as React.ReactNode)
+                          : null}
                     </td>
                   ))}
                 </tr>
@@ -65,18 +64,17 @@ export function Table<T>({ columns, data,handlePrev,handleNext }: TableProps<T>)
         </table>
       </div>
 
-      {/* Footer (Optional Placeholder) */}
       <div className="flex justify-between items-center px-4 py-3 border-t text-sm text-gray-500">
         <span>Showing {data.length} entries</span>
         <div className="flex gap-2">
           <button
-          onClick={() => handlePrev()}
-           className="px-3 py-1 border rounded-md hover:bg-gray-100">
+            onClick={() => handlePrev()}
+            className="px-3 py-1 border rounded-md hover:bg-gray-100">
             Prev
           </button>
-          <button 
-          onClick={() => handleNext()}
-          className="px-3 py-1 border rounded-md bg-black text-white">
+          <button
+            onClick={() => handleNext()}
+            className="px-3 py-1 border rounded-md bg-black text-white">
             Next
           </button>
         </div>

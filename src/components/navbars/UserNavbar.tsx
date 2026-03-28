@@ -31,7 +31,7 @@ const UserNavbar: React.FC<INavbarProps> = ({role, isAuthenticated }) => {
 
                     {!isAuthenticated ? (
                         <>
-                            <button onClick={() => navigate("/user/login")} className="px-4 py-1.5 shadow-gray-500 shadow-sm text-sm text-foreground border border-2 border-border rounded-full hover:bg-primary transition">
+                            <button onClick={() => navigate(`/${role}/login`)} className="px-4 py-1.5 shadow-gray-500 shadow-sm text-sm text-foreground border border-2 border-border rounded-full hover:bg-primary transition">
 
                                 Login
 

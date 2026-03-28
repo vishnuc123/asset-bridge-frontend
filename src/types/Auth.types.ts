@@ -1,4 +1,4 @@
-export type TRole = "User"|"Admin"|"Property_owner"|"Investor"
+export type TRole = "User"|"Admin"|"Owner"|"Investor"
 
 
 export type TSignupProps = {

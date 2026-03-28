@@ -30,7 +30,7 @@ export const useSetRole = () => {
                     navigate("/investor/Home_page");
                     break;
 
-                case "Property_owner":
+                case "Owner":
                     navigate("/owner/Home_page");
                     break;
 

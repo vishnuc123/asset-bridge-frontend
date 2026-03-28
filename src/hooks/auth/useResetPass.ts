@@ -9,13 +9,14 @@ export const useResetPass = () => {
         mutationFn:(values:TResetPassData) => ResetPass(values),
         onSuccess:(res) => {
             if(res.success){
+                toast.success("password resetted successfully")
                 console.log("password resetted successfully")
             }
         },
         onError:(err:ICustomError) => {
         
             toast(err?.message || "something went wrong")
-            console.log("error while resetting password",error)
+            // console.log("error while resetting password",error)
         }
         
     })
