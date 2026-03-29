@@ -25,7 +25,7 @@ export const useLogout = (role: TRole) => {
         onError: (err: ICustomError) => {
             console.log("error from uselogout", err)
 
-            toast.error(err?.message || "something went wrong")
+            toast.error(err?.response.data.message || "something went wrong")
 
             // toast
         }

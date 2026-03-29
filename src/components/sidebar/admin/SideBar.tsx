@@ -14,6 +14,9 @@ import {
     ChevronLeft,
     ChevronRight,
 } from "lucide-react";
+import { useLogout } from "../../../hooks/auth/useLogout";
+import { Roles } from "../../../constants/Roles";
+import { logout } from "../../../store/slices/Auth.slice";
 
 interface Props {
     collapsed: boolean;
@@ -31,6 +34,7 @@ const menu = [
 ];
 
 const AdminSidebar: React.FC<Props> = ({ collapsed, }) => {
+    const {mutate:LogoutUser} = useLogout(Roles.admin_role)
     return (
         <aside
             className={`bg-white h-full shadow-md transition-all duration-300 
@@ -72,7 +76,9 @@ const AdminSidebar: React.FC<Props> = ({ collapsed, }) => {
 
             {/* Logout */}
             <div className="absolute bottom-4 w-50 px-2">
-                <button className="flex items-center gap-3 p-3 w-full text-red-500 hover:bg-red-50 rounded-lg">
+                <button
+                onClick={() => logout()} 
+                className="flex items-center gap-3 p-3 w-full text-red-500 hover:bg-red-50 rounded-lg">
                     <LogOut size={20} />
                     {!collapsed && <span>Logout</span>}
                 </button>

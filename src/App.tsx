@@ -13,11 +13,24 @@ import ForgetPassword from './pages/ForgetPassword'
 import { useSelector } from 'react-redux'
 import type { RootState } from './store/store'
 import OwnerRoutes from './routes/OwnerRoutes'
+import LogRocket from "logrocket"
+import type { TRole } from './types/Auth.types'
 
 
 const App: React.FC = () => {
   useAuthInit()
   const auth = useSelector((s: RootState) => s.auth)
+
+  useEffect(() => {
+    if (!auth.user?.userId) return;
+
+    LogRocket.identify(auth.user.userId, {
+      email: auth.user.email,
+      role: auth.activeRole as TRole,
+    });
+
+  }, [auth.user?.userId, auth.activeRole]);
+
   if (auth.isLoading) {
     return <div>loading ....</div>
   }

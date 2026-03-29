@@ -39,7 +39,10 @@ const ForgetPassword = () => {
         verifiyOtpLogic({userId,otp,purpose:"reset"})
     }
 
-    const {mutate:ResetPassLogic,isPending:ResetLoading} = useResetPass()
+    const {mutate:ResetPassLogic,isPending:ResetLoading} = useResetPass(() => {
+        setIsShowReset(false)
+        navigate('/')
+    })
     const handleResetPass = (email:string,password:string) => {
         ResetPassLogic({email,password})
     }

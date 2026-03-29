@@ -46,7 +46,7 @@ export const useGoogleLogin = (role: TRole) => {
         },
         onError: (error: ICustomError) => {
             // toast
-            toast.error(error?.message || "something went wrong")
+            toast.error(error?.response.data.message || "something went wrong")
 
             console.log("error while login through google", error)
         }

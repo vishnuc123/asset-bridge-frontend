@@ -2,6 +2,8 @@
 
 import { Search, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLogout } from "../../../hooks/auth/useLogout";
+import { Roles } from "../../../constants/Roles";
 
 interface HeaderProps {
   isAuthenticated: boolean;
@@ -9,6 +11,7 @@ interface HeaderProps {
 
 export default function Header({ isAuthenticated }: HeaderProps) {
   const navigate = useNavigate();
+  const { mutate:logoutUser} = useLogout(Roles.admin_role)
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
@@ -66,7 +69,9 @@ export default function Header({ isAuthenticated }: HeaderProps) {
                 Profile
               </button>
 
-              <button className="px-3 py-1.5 text-sm rounded-full text-red-500 hover:bg-red-500/10 transition">
+              <button
+              onClick={() => logoutUser()} 
+              className="px-3 py-1.5 text-sm rounded-full text-red-500 hover:bg-red-500/10 transition">
                 Logout
               </button>
             </>

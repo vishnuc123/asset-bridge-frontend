@@ -1,11 +1,11 @@
-export type TRole = "User"|"Admin"|"Owner"|"Investor"
+export type TRole = "User" | "Admin" | "Owner" | "Investor"
 
 
 export type TSignupProps = {
-    role:string,
-    subtitle:string,
-    onSubmit:(data:any) => void,
-    isLoading:boolean,
+    role: string,
+    subtitle: string,
+    onSubmit: (data: any) => void,
+    isLoading: boolean,
 }
 
 export type TSignUpFormValues = {
@@ -19,67 +19,79 @@ export type TSignUpFormValues = {
 }
 
 export type TotpFormValues = {
-    otp:string,
-    userId : string,
-    purpose:"signup" | "reset"
+    otp: string,
+    userId: string,
+    purpose: "signup" | "reset"
 }
 
 export type TOtpVerificationProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (otp: string) => void;
-  length?: number;
-  userId:string
-  isOtploading?: boolean;
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (otp: string) => void;
+    length?: number;
+    onResend: () => void
+    userId: string
+    timeleft: number
+    isOtploading?: boolean;
 };
 
 
 
 
 export type TloginFormProps = {
-    role:TRole,
-    subtitle:string,
-    btnText:string,
-    onSubmit:(data:any) => void,
-    isLoading:boolean
+    role: TRole,
+    subtitle: string,
+    btnText: string,
+    onSubmit: (data: any) => void,
+    isLoading: boolean
 }
 
 export type TloginFormData = {
-    email:string,
-    password:string
+    email: string,
+    password: string
 }
 
 export type TloginUserResponse = {
-    data:{
-        userid:string,
-        roles:TRole[],
-        activeRole?:TRole
-        email:string
+    data: {
+        userid: string,
+        roles: TRole[],
+        activeRole?: TRole
+        email: string
     }
 }
 
 export type TGoogleLoginValues = {
     credential: string,
-    role:Exclude<TRole,"Admin">
+    role: Exclude<TRole, "Admin">
 }
 
 
 export type TUserData = {
-    userId:string,
-    firstname:string,
-    lastname:string,
-    email:string,
-    roles:TRole[],
-    status:string,
-    createdAt:Date
-    
+    userId: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    roles: TRole[],
+    isBlocked:boolean,
+    status: string,
+    createdAt: Date
+
 }
 
-export type TForgetPasswordData={
-    email:string
+export type TForgetPasswordData = {
+    email: string
 }
 
 export type TResetPassData = {
-    email:string,
-    password:string
+    email: string,
+    password: string
+}
+export type TResendOtp = {
+    userId: string
+}
+
+
+export type TUpdateUserStatus = {
+    userId:string,
+    isBlocked: boolean
 }

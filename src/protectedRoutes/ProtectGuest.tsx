@@ -16,7 +16,7 @@ const ProtectGuest: React.FC<GuestRouteProps> = ({ children }) => {
 
             return <Navigate to={`/${auth.activeRole}/Home_page`} replace />
         }
-        return <Navigate to={`/${auth.user.roles[0].toLowerCase()}/Home_page`} />
+        // return <Navigate to={`/${auth.user.roles[0].toLowerCase()}/Home_page`} />
     }
 
     return children;

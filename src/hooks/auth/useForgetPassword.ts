@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { TForgetPasswordData } from "../../types/Auth.types"
 import { ForgetPassword } from "../../services/authServices"
+import toast from "react-hot-toast"
+import type { ICustomError } from "../../types/Custom.types"
 
 export const useForgetPassword = () => {
     return useMutation({
@@ -13,8 +15,9 @@ export const useForgetPassword = () => {
                 console.log("failed",res.message)
             }
         }, 
-        onError:(err) => {
+        onError:(err:ICustomError) => {
             console.log("error from forgetpassword",err)
+            toast.error(err?.response?.data?.message || "something went wrong")
         }
     })
 }

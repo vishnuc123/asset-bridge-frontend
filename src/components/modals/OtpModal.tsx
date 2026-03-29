@@ -1,54 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { TOtpVerificationProps } from "../../types/Auth.types";
 
-
-
 const ResetPassModal: React.FC<TOtpVerificationProps> = ({
   isOpen,
   onClose,
   onSubmit,
+  onResend,
   length = 6,
-  // userId,
+  timeleft, 
   isOtploading = false,
 }) => {
 
-  // const [otp, setOtp] = useState<string[]>(Array(length).fill(""));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-  // const inputRefs = useRef<HTMLInputElement[] | []>([]);
   const [otpValues, setOtpValues] = useState(Array(6).fill(''));
   const [otpError, setOtpError] = useState<string | null>(null);
-  const [timer, setTimer] = useState(60);
-  const [canResend, setCanResend] = useState(false);
 
   const setInputRef = (index: number) => (el: HTMLInputElement | null) => {
     inputsRef.current[index] = el;
   };
 
+  // ✅ Reset OTP when modal opens
   useEffect(() => {
     if (!isOpen) return;
 
     setOtpValues(Array(6).fill(''));
     setOtpError(null);
-    setTimer(60);
-    setCanResend(false);
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen || timer <= 0) return;
-
-    const countdown = setInterval(() => {
-      setTimer(prev => {
-        if (prev <= 1) {
-          clearInterval(countdown);
-          setCanResend(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(countdown);
-  }, [isOpen, timer]);
 
   const handleChange = (index: number, value: string) => {
     if (!/^\d?$/.test(value)) return;
@@ -62,17 +39,17 @@ const ResetPassModal: React.FC<TOtpVerificationProps> = ({
   };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key == 'Backspace') {
-      if (otpValues[index] == '') {
+    if (e.key === 'Backspace') {
+      if (otpValues[index] === '') {
         const prevInput = inputsRef.current[index - 1];
         if (prevInput) prevInput.focus();
       } else {
         const updatedOtp = [...otpValues];
         updatedOtp[index] = '';
-        setOtpValues(updatedOtp)
+        setOtpValues(updatedOtp);
       }
     }
-  }
+  };
 
   const validateOtp = () => {
     const otp = otpValues.join('');
@@ -90,11 +67,6 @@ const ResetPassModal: React.FC<TOtpVerificationProps> = ({
       onSubmit(otp);
     }
   };
-
-  const handleCloseOtpModal = () => {
-    onClose();
-    setOtpValues(Array(6).fill(''));
-  }
 
   if (!isOpen) return null;
 
@@ -118,7 +90,26 @@ const ResetPassModal: React.FC<TOtpVerificationProps> = ({
           Enter the {length}-digit code sent to your email
         </p>
 
-        {/* OTP Boxes (aligned with your state logic) */}
+        {/* ✅ TIMER UI (FIXED) */}
+        <div className="text-sm text-muted-foreground mb-4">
+          {timeleft > 0 ? (
+            <span>
+              Resend OTP in{" "}
+              <span className="font-semibold text-foreground">
+                {timeleft}s
+              </span>
+            </span>
+          ) : (
+            <button
+              onClick={onResend}
+              className="text-primary font-medium hover:underline"
+            >
+              Resend OTP
+            </button>
+          )}
+        </div>
+
+        {/* OTP Inputs */}
         <div className="flex justify-between gap-2 mb-5">
           {otpValues.map((digit, index) => (
             <input
@@ -127,8 +118,8 @@ const ResetPassModal: React.FC<TOtpVerificationProps> = ({
               type="text"
               value={digit}
               maxLength={1}
-              onChange={(e) => handleChange(index,e.target.value)}
-              onKeyDown={(e) => handleKeyDown(index,e)}
+              onChange={(e) => handleChange(index, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(index, e)}
               className="w-10 h-12 text-center text-lg font-semibold 
                          bg-background border border-border rounded-lg 
                          focus:outline-none focus:ring-2 focus:ring-primary"
@@ -136,10 +127,15 @@ const ResetPassModal: React.FC<TOtpVerificationProps> = ({
           ))}
         </div>
 
+        {/* Error */}
+        {otpError && (
+          <p className="text-red-500 text-sm mb-2">{otpError}</p>
+        )}
+
         {/* Submit */}
         <button
           onClick={handleSubmit}
-          disabled={isOtploading || otpValues.join("").length !== length}
+          disabled={isOtploading || otpValues.join("").length !== length }
           className="w-full bg-primary text-primary-foreground py-2 rounded-lg 
                      disabled:opacity-50"
         >

@@ -44,7 +44,7 @@ export const useSetRole = () => {
 
         },
         onError: (err: ICustomError) => {
-            toast.error(err?.message || "something went wrong")
+            toast.error(err?.response.data.message || "something went wrong")
 
         }
     });

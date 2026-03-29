@@ -20,7 +20,9 @@ const AdminNavbar = () => {
           <button className="px-3 py-1.5 rounded-full hover:bg-card text-muted-foreground">
             Admin
           </button>
-          <button className="px-3 py-1.5 rounded-full text-red-500 hover:bg-red-500/10">
+          <button 
+          
+          className="px-3 py-1.5 rounded-full text-red-500 hover:bg-red-500/10">
             Logout
           </button>
         </div>

@@ -19,6 +19,7 @@ export interface IUser {
   email: string;
   roles: TRole[]
   status: "active" | "pending" | "banned";
+  isBlocked:boolean,
   kycStatus: string;
   emailVerified: boolean;
   phoneVerified: boolean;

@@ -8,8 +8,10 @@ import { useGetAllUsers } from '../../hooks/admin/useGetallUsers'
 import type { TSortOption } from '../../types/Custom.types'
 import { Roles } from '../../constants/Roles'
 import { ArrowDownAz, ArrowUpAz, Clock, Search } from 'lucide-react'
-import { userColumns } from '../../components/tables/admin/Coloumn'
 import CustomSort from '../../components/common/CustomSort'
+import { getUserColumns } from '../../components/tables/admin/Coloumn'
+import { useChangeUserStatus } from '../../hooks/admin/useChangeUserStatus'
+import type { TUpdateUserStatus, TUserData } from '../../types/Auth.types'
 
 
 const Admin_Manage_user = () => {
@@ -20,6 +22,13 @@ const Admin_Manage_user = () => {
     const [debouncedValue, SetDebouncedValue] = useState<string>('');
     const limit = 10
     const { data: userdata, isLoading } = useGetAllUsers(page, limit, Roles.admin_role, debouncedValue, sortOption)
+    const { mutate: updateUserStatus } = useChangeUserStatus()
+    const handleToggleStatus = (user: TUserData) => {
+        updateUserStatus({
+            userId: user.userId,
+            isBlocked: user.isBlocked,
+        });
+    };
     // console.log("userdata query", userdata)
 
     useEffect(() => {
@@ -107,7 +116,7 @@ const Admin_Manage_user = () => {
                     <CustomSort data={sortOptions} />
 
                     <Table
-                        columns={userColumns} data={userdata?.data?.users ?? []}
+                        columns={getUserColumns(handleToggleStatus)} data={userdata?.data?.users ?? []}
                         handleNext={handleNext}
                         handlePrev={handlePrev}
                     />

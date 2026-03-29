@@ -1,20 +1,24 @@
 import { data } from "react-router-dom";
 import { Auth_Apis } from "../constants/apis";
-import type { TForgetPasswordData, TGoogleLoginValues, TloginFormData, TotpFormValues, TResetPassData, TRole, TSignUpFormValues } from "../types/Auth.types";
+import type { TForgetPasswordData, TGoogleLoginValues, TloginFormData, TotpFormValues, TResendOtp, TResetPassData, TRole, TSignUpFormValues } from "../types/Auth.types";
 import { axiosInstance } from "./axiosInstance";
 
 
 const ENDPOINTS = {
     user: '/user',
-    property_owner: '/owner',
+    owner: '/owner',
     admin: '/admin',
     investor: '/investor',
 }
 
 const getEndpoint = (role: string): string => {
     const lowerRole = role.toLowerCase() as keyof typeof ENDPOINTS;
-    return ENDPOINTS[lowerRole] || "/user";
+    if (!ENDPOINTS[lowerRole]) {
+        throw new Error(`Invalid role: ${role}`)
+    }
+    return ENDPOINTS[lowerRole];
 };
+
 export const register = async (data: TSignUpFormValues, role: string) => {
     const endpoint = getEndpoint(role)
     console.log(endpoint)
@@ -28,6 +32,8 @@ export const verifyOtp = async (data: TotpFormValues, role: string) => {
     return res.data
 }
 export const Login = async (data: TloginFormData, role: string) => {
+    console.log("role", role);
+
     const endpoint = getEndpoint(role)
     console.log(endpoint)
     const res = await axiosInstance.post(`/api${endpoint}${Auth_Apis.login}`, data)
@@ -57,12 +63,17 @@ export const LogoutUser = async (role: TRole) => {
     return res.data
 }
 
-export const ForgetPassword = async (data:TForgetPasswordData) => {
-    const res = await axiosInstance.post(`/api/user${Auth_Apis.forgetPassword}`,data)
+export const ForgetPassword = async (data: TForgetPasswordData) => {
+    const res = await axiosInstance.post(`/api/user${Auth_Apis.forgetPassword}`, data)
     return res.data
 }
 
-export const ResetPass = async(data:TResetPassData) => {
-    const res = await axiosInstance.post(`/api/user${Auth_Apis.resetPassword}`,data)
+export const ResetPass = async (data: TResetPassData) => {
+    const res = await axiosInstance.post(`/api/user${Auth_Apis.resetPassword}`, data)
     return res.data
 }
+export const ResendOtp = async (data: TResendOtp) => {
+    const res = await axiosInstance.post(`/api/user${Auth_Apis.resendOtp}`, data)
+    return res.data
+}
+

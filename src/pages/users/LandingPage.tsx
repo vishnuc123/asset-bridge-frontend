@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Roles } from "../../constants/Roles";
 import UserNavbar from "../../components/navbars/userNavbar";
 
 export default function UserLandingPage() {
@@ -7,7 +8,7 @@ export default function UserLandingPage() {
     <div className="bg-background text-white min-h-screen font-sans">
 
       {/* Navbar */}
-      <UserNavbar isAuthenticated={false}/>
+      <UserNavbar role={Roles.user_role} isAuthenticated={false}/>
 
       {/* Hero Section */}
       <div className="relative px-4 md:px-10 pt-6 md:pt-10">
