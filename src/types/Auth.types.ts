@@ -72,7 +72,7 @@ export type TUserData = {
     lastname: string,
     email: string,
     roles: TRole[],
-    isBlocked:boolean,
+    isBlocked: boolean,
     status: string,
     createdAt: Date
 
@@ -92,6 +92,31 @@ export type TResendOtp = {
 
 
 export type TUpdateUserStatus = {
-    userId:string,
+    userId: string,
     isBlocked: boolean
+}
+
+export type TKycFile = {
+    file: File;
+    fileName: string;
+    fileUrl: string;
+    status: "pending" | "approved" | "rejected";
+};
+
+export type TKycUserData = {
+    profileImage: TKycFile;
+    selfieVideo: TKycFile;
+    aadhaar: TKycFile;
+};
+export type TKycFileMeta = {
+  type: "profile" | "aadhaar" | "selfie"
+  fileName: string
+  fileType: string
+}
+export type TSignedUrlItem = {
+    type: "profile" | "aadhaar" | "selfie"
+    url: {
+        url: string   // signed URL (PUT)
+        key: string   // S3 file path
+    }
 }

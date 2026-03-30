@@ -6,6 +6,8 @@ import OwnerLoginPage from '../pages/property_owners/OwnerLogin'
 import OwnerLandingPage from '../pages/property_owners/OwnerLanding'
 import OwnerSignupPage from '../pages/property_owners/OwnerSignup'
 import OwnerHomePage from '../pages/property_owners/OwnerHome'
+import KycPage from '../pages/property_owners/OwnerKyc'
+import KycGuard from '../protectedRoutes/KYCguard'
 
 const OwnerRoutes = () => {
   return (
@@ -32,7 +34,15 @@ const OwnerRoutes = () => {
 
       <Route path='Home_page' element={
         <ProtectUser allowedRoles={[Roles.property_owner_role]}>
-          <OwnerHomePage />
+          <KycGuard>
+            <OwnerHomePage />
+
+          </KycGuard>
+        </ProtectUser>
+      } />
+      <Route path='kyc_verification' element={
+        <ProtectUser allowedRoles={[Roles.property_owner_role]}>
+          <KycPage />
         </ProtectUser>
       } />
     </Routes>

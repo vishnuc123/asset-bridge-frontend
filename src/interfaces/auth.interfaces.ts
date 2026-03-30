@@ -19,7 +19,7 @@ export interface IUser {
   email: string;
   roles: TRole[]
   status: "active" | "pending" | "banned";
-  isBlocked:boolean,
+  isBlocked: boolean,
   kycStatus: string;
   emailVerified: boolean;
   phoneVerified: boolean;
@@ -30,7 +30,7 @@ export interface IUser {
 export interface AuthState {
   user: IUser | null;
   activeRole: TRole | null
-  isRoleinitilized: boolean,
+  kycStatus : "pending"|"verified"|"rejected"
   isAuthenticated: boolean;
   isLoading: boolean
 }
@@ -39,9 +39,22 @@ export interface IGoogleProps {
   role: TRole
 }
 export interface IForgetPasswordProps {
-  role:TRole
-  subtitle:string,
-  btnText:string,
-  onSubmit:(data:any) => void
-  isLoading :boolean
+  role: TRole
+  subtitle: string,
+  btnText: string,
+  onSubmit: (data: any) => void
+  isLoading: boolean
+}
+
+export interface IKycFormProps {
+  profileImage: File | null;
+  idProof: File | null;
+  selfieVideo: File | null;
+
+  setProfileImage: (file: File | null) => void;
+  setIdProof: (file: File | null) => void;
+  setSelfieVideo: (file: File | null) => void;
+
+  onSubmit: () => void;
+  loading?: boolean;
 }

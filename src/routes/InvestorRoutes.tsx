@@ -7,6 +7,8 @@ import ProtectUser from '../protectedRoutes/ProtectUser'
 import { Roles } from '../constants/Roles'
 import Investor_landing_page from '../pages/investors/Investor_Landing_page'
 import InvesorSignup from '../pages/investors/Investor_signup'
+import KycPage from '../pages/property_owners/OwnerKyc'
+import KycGuard from '../protectedRoutes/KYCguard'
 
 const InvestorRoutes = () => {
   return (
@@ -37,8 +39,15 @@ const InvestorRoutes = () => {
 
       <Route path='Home_page' element={
         <ProtectUser allowedRoles={[Roles.investor_role]}>
+          <KycGuard>
+            <Investor_Home_page />
+          </KycGuard>
+        </ProtectUser>
+      } />
+      <Route path='kyc_verification' element={
+        <ProtectUser allowedRoles={[Roles.investor_role]}>
 
-          <Investor_Home_page />
+          <KycPage />
         </ProtectUser>
       } />
     </Routes>
